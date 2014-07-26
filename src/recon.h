@@ -1,6 +1,7 @@
 #ifndef _INCL_RECON
 #define _INCL_RECON
 
+// TEST STATUS: Not tested, simple enough functions
 
 void first_order_xi(int ni, int nj, double q[ni+1][nj+1], double ql[ni][nj-1], double qr[ni][nj-1]){
   int njm = nj-1;
