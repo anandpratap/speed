@@ -1,7 +1,10 @@
 #ifndef _INCL_FLUX
 #define _INCL_FLUX
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
+#include<iostream>
+#include <assert.h>
+#include <typeinfo>
 
 // nx and ny are face normal, see type double
 // can make this much better!
@@ -46,17 +49,22 @@ __declspec(vector) void roeflux(double nx, double ny,			\
   double dr = sqrt(nx*nx + ny*ny);
   double r1 = nx/dr;
   double r2 = ny/dr;
-  
+
+  //assert(abs(r2) < 1e-10);
   double uu = r1*uav + r2*vav;
   double c2 = cav*cav;
   double c2i = 1/c2;
-  double auu = abs(uu);
-  double aupc = abs(uu + cav);
-  double aumc = abs(uu - cav);
+  double auu = std::abs(uu);
+  double aupc = std::abs(uu + cav);
+  double aumc = std::abs(uu - cav);
 
   double uulft = r1*ulft + r2*vlft;
   double uurht = r1*urht + r2*vrht;
-
+  /* std::cout<<typeid(std::abs(rlft-rrht)).name()<<"\n"; */
+  /* if(abs(rlft-rrht)>1e-10){ */
+  /*   std::cout<<r1<<"uulft "<<vlft<<"\n"; */
+  /*   std::cout<<r1<<"uurht "<<vlft<<"\n"; */
+  /* } */
   double rcav = rav*cav;
   double aquu = uurht - uulft;
   double c2ih = 0.5*c2i;
@@ -69,7 +77,7 @@ __declspec(vector) void roeflux(double nx, double ny,			\
   b4 = b1 + b2 + b3;
   b5 = cav*(b2 - b3);
   b6 = ruuav*(aq2 - r1*aquu);
-  b7 = ruuav*(aq3 - r1*aquu);
+  b7 = ruuav*(aq3 - r2*aquu);
 
   aq1 = b4;
   aq2 = uav*b4 + r1*b5 + b6;
@@ -83,6 +91,8 @@ __declspec(vector) void roeflux(double nx, double ny,			\
   f[0] = aj*(rlft*uulft + rrht*uurht - aq1);
   f[1] = aj*(rulft*uulft + rurht*uurht + r1*plar - aq2);
   f[2] = aj*(rvlft*uulft + rvrht*uurht + r2*plar - aq3);
+
+  //  std::cout<<"roe"<<f[2]<<" "<<b7<<"\n";
   f[3] = aj*(eplft*uulft + eprht*uurht - aq4);
 
 }
