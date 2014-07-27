@@ -24,7 +24,7 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
   int njp = nj + 1;
   int nim = ni - 1;
   int njm = nj - 1;
-  int order = 2;
+  int order = 1;
   
   res[0:nim][0:njm][0:4] = 0.0;
   double rho[nip][njp], u[nip][njp], v[nip][njp], p[nip][njp];
@@ -33,9 +33,8 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
   
   double c[nim][njm];
   c[:][:] = sqrt(gamma*p[1:nim][1:njm]/rho[1:nim][1:njm]) + sqrt(pow(u[1:nim][1:njm],2) + pow(v[1:nim][1:njm],2));
-  c[:][:] *= (ds_eta[:][:] + ds_xi[:][:]);
+  c[:][:] = (ds_eta[:][:] + ds_xi[:][:])*c[:][:];
   dt[:][:] = vol[:][:]/c[:][:];
-  
   double rlft_xi[ni][njm], ulft_xi[ni][njm], vlft_xi[ni][njm], plft_xi[ni][njm];
   double rrht_xi[ni][njm], urht_xi[ni][njm], vrht_xi[ni][njm], prht_xi[ni][njm];
   double flux_xi[ni][njm][4];
