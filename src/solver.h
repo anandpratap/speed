@@ -2,7 +2,7 @@
 #define _INCL_SOLVER
 #include "integrator.h"
 #include "io.h"
-
+#include "force.h"
 void print_stuff(double res_rho, int iteration){
   printf("res_rho_l2: %8.3E, iteration: %d\n",res_rho, iteration);
 }
@@ -32,12 +32,16 @@ void solver(int ni, int nj, double Q[ni-1][nj-1][4],			\
     
     if(iteration%100==0)
       print_stuff(res_rho, iteration);
-    if(iteration%1000==0)
+    if(iteration%1000==0){
       writedata(ni, nj, Q, xc, yc);
-    
+      force(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, xc, yc, freestream, gamma);
+    }
+  
     iteration += 1;
   }
   
+  writedata(ni, nj, Q, xc, yc);
+    
 }
 
 #endif
