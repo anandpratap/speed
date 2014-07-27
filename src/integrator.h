@@ -15,7 +15,7 @@ void euler(int ni, int nj, double Q[ni-1][nj-1][4],			\
   
   residual(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, res, vol, ds_eta, ds_xi, dt, freestream, gamma);
   for(int i=0; i< 4; i++)
-    Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*(dt[:][:])*.8;
+    Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*(dt[:][:])*.5;
   
 
   *res_rho = sqrt(__sec_reduce_add(pow(res[:][:][0],2)));
@@ -33,17 +33,23 @@ void jst(int ni, int nj, double Q[ni-1][nj-1][4],			\
   int njm = nj - 1;
   double res[nim][njm][4];
   double dt[nim][njm];
+  double dt_orig[nim][njm];
   int order = 4;
   for(int n=0; n< order; n++){
     residual(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, res, vol, ds_eta, ds_xi, dt, freestream, gamma);
+    if(n==0){
+      dt_orig[:][:] = dt[:][:];
+    }
     for(int i=0; i< 4; i++)
-      Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*(dt[:][:])/(order-n)*2.0;
+      Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*dt[:][:]/(order-n)*0.5;
+
   }
 
   *res_rho = sqrt(__sec_reduce_add(pow(res[:][:][0],2)));
-
-  
 }
+
+
+
 
 
 

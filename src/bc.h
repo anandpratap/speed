@@ -63,6 +63,7 @@ void bc(int ni, int nj, double Q[ni-1][nj-1][4],			\
   v[nim:j1-1:-1][0] = v[1:j1-1][1];
   p[nim:j1-1:-1][0] = p[1:j1-1][1];
 
+
 }
 
 #endif
