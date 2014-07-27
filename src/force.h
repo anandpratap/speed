@@ -23,7 +23,7 @@ void force(int ni, int nj, double Q[ni-1][nj-1][4],			\
   
   double cp[nb], pw[nb], xw[nb];
   pw[:] = 1.5*p[j1:nb][0] - 0.5*p[j1:nb][1];
-  xw[:] = xc[j1:nb][0];
+  xw[:] = 1.5*xc[j1:nb][0] - 0.5*xc[j1:nb][1];
   double q_inf = 0.5*rho_inf*u_inf_2;
   cp[:] = (pw[:] - p_inf)/q_inf;
   
@@ -43,9 +43,8 @@ void force(int ni, int nj, double Q[ni-1][nj-1][4],			\
   double Fx, Fy;
   Fx = -__sec_reduce_add(cp[:]*neta_x[j1:nb][0]);
   Fy = -__sec_reduce_add(cp[:]*neta_y[j1:nb][0]);
-  
+
   double alpha = freestream.alpha;
-  
   double Cl, Cd;
   Cl = Fy*cos(alpha) - Fx*sin(alpha);
   Cd = Fx*cos(alpha) + Fy*sin(alpha);
