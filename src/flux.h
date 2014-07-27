@@ -10,10 +10,10 @@
 // can make this much better!
 // TEST STATUS: checked, DEFCON 3
 
-__declspec(vector) void roeflux(double nx, double ny,			\
-				double rlft, double ulft, double vlft, double plft, \
-				double rrht, double urht, double vrht, double prht, \
-				double gamma, double f[4]){
+__declspec(vector)  void roeflux(double nx, double ny,		\
+				 double rlft, double ulft, double vlft, double plft, \
+				 double rrht, double urht, double vrht, double prht, \
+				 double gamma, double f[4]){
   double gm1 = gamma - 1.0;
   double ogm1 = 1/gm1;
 
