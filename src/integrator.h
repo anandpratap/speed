@@ -15,7 +15,7 @@ void euler(int ni, int nj, double Q[ni-1][nj-1][4],			\
   
   residual(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, res, vol, ds_eta, ds_xi, dt, freestream, gamma);
   for(int i=0; i< 4; i++)
-    Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*((dt[:][:]))*.8;
+    Q[:][:][i] = Q[:][:][i] + res[:][:][i]/vol[:][:]*(dt[:][:])*.8;
   
 
   *res_rho = sqrt(__sec_reduce_add(pow(res[:][:][0],2)));
