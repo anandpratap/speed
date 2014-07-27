@@ -46,12 +46,12 @@ void bc(int ni, int nj, double Q[ni-1][nj-1][4],			\
   double ds[nb];
   ds[:] =pow(neta_x[j1-1:nb][0], 2) + pow(neta_y[j1-1:nb][0], 2);
 
-  p[j1:nb][0] = p[j1:nb][1];
-  rho[j1:nb][0] = rho[j1:nb][1];
+  p[j1:nb][0] = 1.5*p[j1:nb][1] - 0.5*p[j1:nb][2];
+  rho[j1:nb][0] = 1.5*rho[j1:nb][1] - 0.5*rho[j1:nb][2];
 
-  un[:] = (u[j1:nb][1]*neta_x[j1-1:nb][0] + v[j1:nb][1]*neta_y[j1-1:nb][0]);
-  u[j1:nb][0] = u[j1:nb][1] - 2*un[:]*neta_x[j1-1:nb][0]/ds[:];
-  v[j1:nb][0] = v[j1:nb][1] - 2*un[:]*neta_y[j1-1:nb][0]/ds[:];
+  un[:] = ((1.5*u[j1:nb][1] - 0.5*u[j1:nb][2])*neta_x[j1-1:nb][0] + (1.5*v[j1:nb][1] - 0.5*v[j1:nb][2])*neta_y[j1-1:nb][0]);
+  u[j1:nb][0] = 1.5*u[j1:nb][1] - 0.5*u[j1:nb][2] - 2*un[:]*neta_x[j1-1:nb][0]/ds[:];
+  v[j1:nb][0] = 1.5*v[j1:nb][1] - 0.5*v[j1:nb][2] - 2*un[:]*neta_y[j1-1:nb][0]/ds[:];
 
   rho[1:j1-1][0] = rho[nim:j1-1:-1][1];
   u[1:j1-1][0] = u[nim:j1-1:-1][1];
