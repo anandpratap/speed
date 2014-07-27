@@ -42,8 +42,8 @@ void metric(int ni, int nj, double x[ni][nj], double y[ni][nj], double neta_x[ni
   xc[0:nim][0:njm] = 0.25*(x[0:nim][0:njm] + x[1:nim][0:njm] + x[0:nim][1:njm] + x[1:nim][1:njm]);
   yc[0:nim][0:njm] = 0.25*(y[0:nim][0:njm] + y[1:nim][0:njm] + y[0:nim][1:njm] + y[1:nim][1:njm]);
 
-  ds_eta[0:nim][0:njm] = sqrt(pow(neta_x[0:nim][0:njm],2) + pow(neta_y[0:nim][0:njm],2));
-  ds_xi[0:nim][0:njm] = sqrt(pow(nxi_x[0:nim][0:njm],2) + pow(nxi_y[0:nim][0:njm],2));
+  ds_eta[0:nim][0:njm] = sqrt(std::pow(neta_x[0:nim][0:njm],2) + std::pow(neta_y[0:nim][0:njm],2));
+  ds_xi[0:nim][0:njm] = sqrt(std::pow(nxi_x[0:nim][0:njm],2) + std::pow(nxi_y[0:nim][0:njm],2));
   
 }
 
