@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 struct state{
-  double rho, u, v, p;
+  double rho, u, v, p, mach, alpha;
 };
 
 
