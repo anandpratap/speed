@@ -24,7 +24,7 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
   int njp = nj + 1;
   int nim = ni - 1;
   int njm = nj - 1;
-  int order = 1;
+  int order = 2;
   
   res[0:nim][0:njm][0:4] = 0.0;
   double rho[nip][njp], u[nip][njp], v[nip][njp], p[nip][njp];

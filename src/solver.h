@@ -25,6 +25,9 @@ void solver(int ni, int nj, double Q[ni-1][nj-1][4],			\
     else if(integrator == 1){
       jst(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, ds_eta, ds_xi, freestream, &res_rho, gamma);
     }
+    else if(integrator == 2){
+      rk2(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, ds_eta, ds_xi, freestream, &res_rho, gamma);
+    }
     else{
       printf("Integrator not defined.\n");
       exit(-1);
@@ -42,7 +45,8 @@ void solver(int ni, int nj, double Q[ni-1][nj-1][4],			\
   }
   
   writedata(ni, nj, Q, xc, yc);
-    
+  force(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, xc, yc, freestream, gamma);
+	
 }
 
 #endif
