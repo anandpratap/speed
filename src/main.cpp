@@ -27,8 +27,8 @@ int main(void){
   metric(ni, nj, x, y, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi);
   
   // define freestream conditions
-  double fsmach  = 0.8;
-  double alpha = 1.25;
+  double fsmach  = 0.5;
+  double alpha = 0.0;
   state freestream;
   freestream.rho = 1.0;
   freestream.u = fsmach*cos(alpha*PI/180);
@@ -40,12 +40,10 @@ int main(void){
   double Q[nim][njm][4];
   
   double res_rho;
-  bool iread = false;
+  bool iread = true;
   // this intializes the domain, see iread = true or false
   init(ni, nj, Q, freestream, gamma, iread);
-
   
-  
-  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, 1e-10, 1, gamma);
+  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, 1e-10, 2, gamma);
   return 0;
 }
