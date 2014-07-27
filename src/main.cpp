@@ -46,6 +46,6 @@ int main(void){
 
   
   
-  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, 1e-6, 1, gamma);
+  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, 1e-10, 1, gamma);
   return 0;
 }
