@@ -1,10 +1,13 @@
 #ifndef _INCL_IO
 #define _INCL_IO
 #include <fstream>
+#include <iostream>
+#include <iomanip>
 #include "stdio.h"
 #include "utils.h"
 void readgrid(int ni, int nj, double x[ni][nj], double y[ni][nj]){
   std::ifstream infile("grid.unf2");
+  infile >> std::fixed >> std::setprecision(20);
   double xx, yy;
 for(int j=0; j<nj; j++){
  for(int i=0; i<ni; i++){  
