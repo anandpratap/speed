@@ -18,7 +18,7 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
 	      double res[ni-1][nj-1][4], double vol[ni-1][nj-1],	\
 	      double ds_eta[ni-1][nj-1], double ds_xi[ni-1][nj-1],	\
 	      double dt[ni-1][nj-1],struct state freestream,		\
-	      double gamma=1.4){
+	      float gamma=1.4){
 
   int nip = ni + 1;
   int njp = nj + 1;
@@ -42,7 +42,7 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
  
   grad_xi(ni, nj, rho, u, v, p, rlft_xi, ulft_xi, vlft_xi, plft_xi, rrht_xi, urht_xi, vrht_xi, prht_xi, order);
 
-#pragma omp parallel for
+#pragma omp parallel for num_threads(1)
   for(int i = 0; i < ni; i++) {
     for(int j = 0; j < njm; j++) {
       roeflux(nxi_x[i][j], nxi_y[i][j], rlft_xi[i][j], ulft_xi[i][j], vlft_xi[i][j], plft_xi[i][j], \
@@ -58,7 +58,7 @@ void residual(int ni, int nj, double Q[ni-1][nj-1][4],			\
   
   grad_eta(ni, nj, rho, u, v, p, rlft_eta, ulft_eta, vlft_eta, plft_eta, rrht_eta, urht_eta, vrht_eta, prht_eta, order);
   
-#pragma omp parallel for
+#pragma omp parallel for num_threads(1)
   for(int i = 0; i < nim; i++) {
   for(int j = 0; j < nj; j++) {
   roeflux(neta_x[i][j], neta_y[i][j], rlft_eta[i][j], ulft_eta[i][j], vlft_eta[i][j], plft_eta[i][j], \

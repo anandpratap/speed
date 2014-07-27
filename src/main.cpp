@@ -10,7 +10,7 @@ int main(void){
   ni = 281;
   nj = 51;
   
-  double gamma = 1.4;
+  float gamma = 1.4;
   int nim = ni - 1;
   int njm = nj - 1;
   

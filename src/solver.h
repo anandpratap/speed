@@ -13,7 +13,7 @@ void solver(int ni, int nj, double Q[ni-1][nj-1][4],			\
 	    double vol[ni-1][nj-1], double xc[ni-1][nj-1], double yc[ni-1][nj-1], \
 	    double ds_eta[ni-1][nj-1], double ds_xi[ni-1][nj-1],	\
 	    struct state freestream, double tf, int integrator,		\
-	    double gamma = 1.4, bool steadystate=true){
+	    float gamma = 1.4, bool steadystate=true){
   
   
   double res_rho = 1e1;
@@ -30,8 +30,9 @@ void solver(int ni, int nj, double Q[ni-1][nj-1][4],			\
       exit(-1);
     }
     
-    if(iteration%100==0)
+    if(iteration%100==0){
       print_stuff(res_rho, iteration);
+    }
     if(iteration%1000==0){
       writedata(ni, nj, Q, xc, yc);
       force(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, xc, yc, freestream, gamma);

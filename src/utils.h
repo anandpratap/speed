@@ -10,7 +10,7 @@ struct state{
 // TEST STATUS: Checked, DEFCON 3
 // see utilstest on how to use it
 // this is a simd function
-__declspec(vector) void primvars(double Q[4], double gamma, double *rho, double *u, double *v, double *p){
+__declspec(vector) void primvars(double Q[4], float gamma, double *rho, double *u, double *v, double *p){
   double tmp_rho = Q[0];
   double tmp_u = Q[1]/tmp_rho;
   double tmp_v = Q[2]/tmp_rho;
@@ -25,7 +25,7 @@ __declspec(vector) void primvars(double Q[4], double gamma, double *rho, double 
 
 
 // TEST STATUS: Not tested
-void init(int ni, int nj, double Q[ni-1][nj-1][4], struct state freestream, double gamma=1.4, bool restart=false){
+void init(int ni, int nj, double Q[ni-1][nj-1][4], struct state freestream, float gamma=1.4, bool restart=false){
   int nim = ni - 1;
   int njm = nj - 1;
   double rho[nim][njm], u[nim][njm], v[nim][njm], p[nim][njm];
