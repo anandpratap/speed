@@ -6,6 +6,10 @@ struct state{
   double rho, u, v, p, mach, alpha;
 };
 
+struct result{
+  double Cl, Cd;
+};
+
 // TEST STATUS: Checked, DEFCON 3
 // see utilstest on how to use it
 // this is a simd function

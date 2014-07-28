@@ -39,6 +39,7 @@ int speed(int ni, int nj, float fsmach, float alpha, double tol, bool iread, int
   // this intializes the domain, see iread = true or false
   init(ni, nj, Q, freestream, gamma, iread);
   solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, tol, integrator, gamma);
+  
   return 0;
 
 }
