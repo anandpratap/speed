@@ -5,10 +5,8 @@
 #include "utils.h"
 #include "solver.h"
 # define PI 3.14159265358979323846
-int main(void){
-  int ni, nj;
-  ni = 281;
-  nj = 51;
+
+int speed(int ni, int nj, float fsmach, float alpha, double tol, bool iread, int integrator){
   
   float gamma = 1.4;
   int nim = ni - 1;
@@ -18,7 +16,7 @@ int main(void){
   double x[ni][nj], y[ni][nj];
   readgrid(ni, nj, x, y);
   
-
+  
   // declare metric variables
   double xc[nim][njm], yc[nim][njm], vol[nim][njm], ds_eta[nim][njm], ds_xi[nim][njm];
   double neta_x[nim][nj], neta_y[nim][nj];
@@ -27,8 +25,6 @@ int main(void){
   metric(ni, nj, x, y, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi);
   
   // define freestream conditions
-  double fsmach  = 0.5;
-  double alpha = 0.0;
   state freestream;
   freestream.rho = 1.0;
   freestream.u = fsmach*cos(alpha*PI/180);
@@ -40,10 +36,9 @@ int main(void){
   double Q[nim][njm][4];
   
   double res_rho;
-  bool iread = false;
   // this intializes the domain, see iread = true or false
   init(ni, nj, Q, freestream, gamma, iread);
-  
-  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, 1e-10, 2, gamma);
+  solver(ni, nj, Q, neta_x, neta_y, nxi_x, nxi_y, vol, xc, yc, ds_eta, ds_xi, freestream, tol, integrator, gamma);
   return 0;
+
 }
